@@ -73,7 +73,6 @@ const onReportSchema = {
 							type: "array",
 							items: {
 								type: "object",
-								required: ["id"],
 								properties: {
 									id: { type: "string" },
 									inter_participant: {
@@ -99,6 +98,14 @@ const onReportSchema = {
 											status: {
 												type: "string",
 												enum: Object.values(ENUMS.REPORT_STATUS),
+											},
+											error: {
+												type: "object",
+												required: ["code", "message"],
+												properties: {
+													code: { type: "string" },
+													message: { type: "string" },
+												},
 											},
 											reference_no: { type: "string" },
 										},
