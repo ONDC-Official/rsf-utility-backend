@@ -48,6 +48,22 @@ export const UserSchema = z
 			description: "Domain",
 			example: "retail",
 		}),
+		current_np_tcs: z.number().optional().openapi({
+			description: "Current TCS",
+			example: 2.5,
+		}),
+		current_np_tds: z.number().optional().openapi({
+			description: "Current TDS",
+			example: 10,
+		}),
+		current_pr_tcs: z.number().optional().nullable().openapi({
+			description: "Current Provider TCS",
+			example: 2.5,
+		}),
+		current_pr_tds: z.number().optional().nullable().openapi({
+			description: "Current Provider TDS",
+			example: 10,
+		}),
 		np_tcs: z.number().openapi({
 			description: "TCS",
 			example: 2.5,
@@ -63,6 +79,22 @@ export const UserSchema = z
 		pr_tds: z.number().optional().nullable().openapi({
 			description: "Provider TDS",
 			example: 10,
+		}),
+		np_tcs_with_effective_date: z.coerce.date().optional().nullable().openapi({
+			description: "Np tcs with effective date for the order",
+			example: "2025-08-03T00:00:00.000Z",
+		}),
+		np_tds_with_effective_date: z.coerce.date().optional().nullable().openapi({
+			description: "Np tds with effective date for the order",
+			example: "2025-08-03T00:00:00.000Z",
+		}),
+		pr_tcs_with_effective_date: z.coerce.date().optional().nullable().openapi({
+			description: "Provider tcs with effective date for the order",
+			example: "2025-08-03T00:00:00.000Z",
+		}),
+		pr_tds_with_effective_date: z.coerce.date().optional().nullable().openapi({
+			description: "Provider tds with effective date for the order",
+			example: "2025-08-03T00:00:00.000Z",
 		}),
 		tcs_applicability: z.enum(Object.values(APPLICABILITY_VALUES)).openapi({
 			description: "TCS applicability",

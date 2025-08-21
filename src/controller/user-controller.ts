@@ -5,7 +5,6 @@ import { getLoggerMeta } from "../utils/utility";
 import { UserSchema } from "../schema/models/user-schema";
 import { z } from "zod";
 import { validateUserId } from "../types/user-id-type";
-import { send } from "process";
 import { sendError, sendSuccess } from "../utils/resUtils";
 
 const userLogger = logger.child("user-controller");
@@ -34,6 +33,13 @@ export class UserController {
 				getLoggerMeta(req),
 				validationResult.data,
 			);
+
+			/**Adding current tcs and tds value at the first time */
+			validationResult.data.current_np_tcs = validationResult.data?.np_tcs
+			validationResult.data.current_np_tds = validationResult.data?.np_tds
+			validationResult.data.current_pr_tcs = validationResult.data?.pr_tcs
+			validationResult.data.current_pr_tds = validationResult.data?.pr_tds
+
 			const user = await this.userService.createUser(validationResult.data);
 			return sendSuccess(res, user, undefined, 201);
 			// res.status(201).json(user);
@@ -181,6 +187,7 @@ export class UserController {
 			// res.status(400).json({ message: error.message });
 		}
 	};
+
 	userValidationMiddleware = async (
 		req: Request,
 		res: Response,
