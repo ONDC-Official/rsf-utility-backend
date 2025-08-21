@@ -1,3 +1,4 @@
+import "dotenv/config";
 import config from "./config/server-config";
 import createServer from "./server";
 import mongoose from "mongoose";

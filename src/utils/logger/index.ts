@@ -1,4 +1,4 @@
-import "dotenv/config";
+// import "dotenv/config";
 import clc from "cli-color";
 import { isAxiosError } from "axios";
 import { createLogger } from "./winston/logger";
