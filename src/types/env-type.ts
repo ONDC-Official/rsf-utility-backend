@@ -13,5 +13,5 @@ export const envSchema = z.object({
 	SUBSCRIBER_UNIQUE_ID: z.string().describe("Unique ID for the subscriber"),
 	SUBSCRIBER_PRIVATE_KEY: z.string().describe("Private key for the subscriber"),
 	JWT_SECRET: z.string().describe("JWT Scret Token for signing Client ID"),
-	CLIENT_ID: z.string().describe("Client Id for the application"),
+	REACT_APP_CLIENT_ID: z.string().describe("Client Id for the application"),
 });
