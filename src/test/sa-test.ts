@@ -21,8 +21,8 @@ const settlePayload = {
 		action: "settle",
 		bap_id: "fis-staging.ondc.org",
 		bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
-		bpp_id: "sa_nocs.nbbl.com",
-		bpp_uri: "https://ondcnbbl.npci.org.in/nocs/v2",
+		bpp_id: SettleAgencyConfig.agencyId,
+		bpp_uri: SettleAgencyConfig.agencyUrl,
 		transaction_id: uuidv4(),
 		message_id: uuidv4(),
 		timestamp: "2025-08-19T06:04:45.046Z",
@@ -71,7 +71,7 @@ export async function testTrigger() {
 		header,
 	);
 	console.log("Response:", response?.data);
-	saveNpciData(settlePayload);
+	saveSAData(settlePayload);
 	await delay(5000);
 	settlePayload.context.message_id = uuidv4();
 	settlePayload.context.timestamp = new Date().toISOString();
@@ -88,7 +88,7 @@ export async function testTrigger() {
 		},
 		header,
 	);
-	saveNpciData(settlePayload);
+	saveSAData(settlePayload);
 	console.log("Duplicate Response:", duplicateResponse?.data);
 }
 
@@ -96,8 +96,8 @@ async function delay(ms: number) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function saveNpciData(payload: any) {
-	const filePath = "./npci-data.csv";
+function saveSAData(payload: any) {
+	const filePath = "./sa-data.csv";
 	const txId = payload.context.transaction_id;
 	const messageId = payload.context.message_id;
 	const timestamp = payload.context.timestamp;
