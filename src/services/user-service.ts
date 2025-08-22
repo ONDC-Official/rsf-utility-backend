@@ -21,10 +21,10 @@ export class UserService {
 	async updateUserDetails(userId: string, userData: Partial<UserType>) {
 		const allowedFields = [
 			"title",
-			"np_tcs",
-			"np_tds",
-			"pr_tcs",
-			"pr_tds",
+			"np_tcs_effective",
+			"np_tds_effective",
+			"pr_tcs_effective",
+			"pr_tds_effective",
 			"np_tcs_with_effective_date",
 			"np_tds_with_effective_date",
 			"pr_tcs_with_effective_date",
