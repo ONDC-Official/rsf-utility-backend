@@ -32,6 +32,7 @@ export class OrderController {
 			// res.status(400).json({ message: error.message });
 		}
 	};
+	
 	getOrders = async (req: Request, res: Response) => {
 		try {
 			orderLogger.info("Fetching all orders", getLoggerMeta(req));

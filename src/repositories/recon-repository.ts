@@ -213,18 +213,39 @@ export class ReconRepository {
 	}
 
 	/**
-	 * Update recon record by user_id and order_id
+	 * Update recon by user ID and order ID
 	 */
 	async updateByUserAndOrder(
-		user_id: string,
-		order_id: string,
+		userId: string,
+		orderId: string,
 		updateData: Partial<z.infer<typeof ReconSchema>>,
 	) {
 		return await Recon.findOneAndUpdate(
-			{ user_id, order_id },
-			{ $set: updateData },
-			{ new: true, runValidators: true },
+			{ user_id: userId, order_id: orderId },
+			updateData,
+			{ new: true },
 		);
+	}
+
+	/**
+	 * Bulk update multiple recon records
+	 */
+	async updateMultipleRecons(
+		userId: string,
+		updates: Array<{
+			orderId: string;
+			reconData: Partial<z.infer<typeof ReconSchema>>;
+		}>,
+	) {
+		const bulkOps = updates.map(({ orderId, reconData }) => ({
+			updateOne: {
+				filter: { user_id: userId, order_id: orderId },
+				update: { $set: reconData },
+				upsert: true,
+			},
+		}));
+		const result = await Recon.bulkWrite(bulkOps);
+		return result;
 	}
 
 	/**

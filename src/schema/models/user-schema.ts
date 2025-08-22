@@ -48,27 +48,27 @@ export const UserSchema = z
 			description: "Domain",
 			example: "retail",
 		}),
-		current_np_tcs: z.number().optional().openapi({
+		np_tcs_effective: z.number().openapi({
 			description: "Current TCS",
 			example: 2.5,
 		}),
-		current_np_tds: z.number().optional().openapi({
+		np_tds_effective: z.number().openapi({
 			description: "Current TDS",
 			example: 10,
 		}),
-		current_pr_tcs: z.number().optional().nullable().openapi({
+		pr_tcs_effective: z.number().optional().nullable().openapi({
 			description: "Current Provider TCS",
 			example: 2.5,
 		}),
-		current_pr_tds: z.number().optional().nullable().openapi({
+		pr_tds_effective: z.number().optional().nullable().openapi({
 			description: "Current Provider TDS",
 			example: 10,
 		}),
-		np_tcs: z.number().openapi({
+		np_tcs: z.number().optional().nullable().openapi({
 			description: "TCS",
 			example: 2.5,
 		}),
-		np_tds: z.number().openapi({
+		np_tds: z.number().optional().nullable().openapi({
 			description: "TDS",
 			example: 10,
 		}),

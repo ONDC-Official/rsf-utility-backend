@@ -33,12 +33,12 @@ export class UserController {
 				getLoggerMeta(req),
 				validationResult.data,
 			);
-
+			
 			/**Adding current tcs and tds value at the first time */
-			validationResult.data.current_np_tcs = validationResult.data?.np_tcs
-			validationResult.data.current_np_tds = validationResult.data?.np_tds
-			validationResult.data.current_pr_tcs = validationResult.data?.pr_tcs
-			validationResult.data.current_pr_tds = validationResult.data?.pr_tds
+			validationResult.data.np_tcs = validationResult.data?.np_tcs_effective ?? 0
+			validationResult.data.np_tds = validationResult.data?.np_tds_effective ?? 0
+			validationResult.data.pr_tcs = validationResult.data?.pr_tcs_effective ?? 0
+			validationResult.data.pr_tds = validationResult.data?.pr_tds_effective ?? 0
 
 			const user = await this.userService.createUser(validationResult.data);
 			return sendSuccess(res, user, undefined, 201);

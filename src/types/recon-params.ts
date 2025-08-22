@@ -178,3 +178,61 @@ export const MoveReconsBodySchema = z.object({
 });
 
 export type MoveReconsBody = z.infer<typeof MoveReconsBodySchema>;
+
+export const UpdateReconSchema = z.object({
+	recons: z
+		.array(
+			z.object({
+				order_id: z.string().openapi({
+					description: "Order ID to update",
+					example: "order123",
+				}),
+				recon_status: z
+					.enum(Object.values(ENUMS.INTERNAL_RECON_STATUS))
+					.optional()
+					.openapi({
+						description: "Recon status",
+						example: "SENT_PENDING",
+					}),
+				recon_breakdown: z
+					.object({
+						amount: z.number().optional(),
+						commission: z.number().optional(),
+						withholding_amount: z.number().optional(),
+						tcs: z.number().optional(),
+						tds: z.number().optional(),
+					})
+					.partial()
+					.optional()
+					.openapi({
+						description: "Recon breakdown details",
+					}),
+				on_recon_breakdown: z
+					.object({
+						amount: z.number().optional(),
+						commission: z.number().optional(),
+						withholding_amount: z.number().optional(),
+						tcs: z.number().optional(),
+						tds: z.number().optional(),
+					})
+					.partial()
+					.optional()
+					.openapi({
+						description: "On recon breakdown details",
+					}),
+				due_date: z.string().optional().openapi({
+					description: "Due date (YYYY-MM-DD format)",
+					example: "2025-08-07",
+				}),
+				inter_np_settlement: z.number().optional().openapi({
+					description: "Inter NP Settlement amount",
+					example: 1000,
+				}),
+			}),
+		)
+		.openapi({
+			description: "List of recon records to update",
+		}),
+});
+
+export type UpdateReconType = z.infer<typeof UpdateReconSchema>;

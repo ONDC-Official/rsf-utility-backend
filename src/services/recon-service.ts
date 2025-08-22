@@ -106,4 +106,20 @@ export class ReconDbService {
 			reconData,
 		);
 	}
+
+	async updateMultipleRecons(
+		userId: string,
+		updates: Array<{
+			orderId: string;
+			reconData: Partial<ReconType>;
+		}>,
+	) {
+		// Validate user exists
+		const userExists = await this.userService.checkUserById(userId);
+		if (!userExists) {
+			throw new Error(`User with ID ${userId} not found`);
+		}
+
+		return await this.reconRepo.updateMultipleRecons(userId, updates);
+	}
 }
