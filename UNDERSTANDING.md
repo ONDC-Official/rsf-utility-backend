@@ -94,10 +94,10 @@ This document provides **backend-specific technical implementation details**. Fo
 
 **Critical Environment Variables:**
 - `NODE_ENV` - Application environment
-- `PORT` - Server port (default: 3000)
+- `BACKEND_PORT` - Server port (default: 3000, updated in commit 656ec21)
 - `MONGODB_URI` - Database connection string
 - `JWT_SECRET` - Authentication secret
-- `CLIENT_ID` - ONDC client identifier
+- `REACT_APP_CLIENT_ID` - ONDC client identifier (updated from CLIENT_ID in commits 656ec21, 85e3284)
 
 ### 2. Request Handling Workflow
 ```typescript
@@ -251,6 +251,25 @@ This document provides **backend-specific technical implementation details**. Fo
 - **Rate Limiting:** DDoS and abuse protection
 
 ---
+
+## Recent Changes (August 2025)
+
+### Environment Configuration Updates
+- **Commit 85e3284** (Aug 21, 2025): Updated environment schema validation for `REACT_APP_CLIENT_ID`
+- **Commit 656ec21** (Aug 21, 2025): Standardized Docker environment configuration
+  - Changed `PORT` → `BACKEND_PORT` for clearer container port management
+  - Updated `CLIENT_ID` → `REACT_APP_CLIENT_ID` for frontend compatibility
+- **Commit 821c202** (Aug 21, 2025): Fixed dotenv import order for proper environment loading
+
+### Configuration Files Updated
+- `src/types/env-type.ts` - Environment validation schema
+- `src/config/auth-config.ts` - Authentication configuration
+- `src/config/server-config.ts` - Server port configuration
+
+---
 This document should be updated whenever significant changes are made to the backend architecture, workflows, or integrations.
 
 **📔 Documentation Sync**: Changes to this document should be reflected in the [main repository UNDERSTANDING.md](../UNDERSTANDING.md) to maintain system-wide consistency.
+
+**Last Understood Commit**: 85e3284 (fix: env-type.ts) - 2025-08-21 22:32:22 +0530
+**Next Update Trigger**: Any functional code changes, architecture modifications, or environment configuration updates
