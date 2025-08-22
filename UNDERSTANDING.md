@@ -10,7 +10,7 @@ This document provides **backend-specific technical implementation details**. Fo
 **Repository:** `https://github.com/ONDC-Official/rsf-utility-backend`  
 **Purpose:** RESTful API server for ONDC reconciliation and settlement operations  
 **Technology:** Node.js + Express + TypeScript + MongoDB  
-**Port:** 3000 (configurable via PORT environment variable)
+**Port:** 3000 (configurable via BACKEND_PORT environment variable)
 
 ## Entry Points
 
@@ -168,10 +168,10 @@ This document provides **backend-specific technical implementation details**. Fo
 - **Webhook Endpoints:** Real-time network event processing
 
 ### Observability Stack
-- **Prometheus:** Metrics collection and exposure
 - **Grafana Loki:** Centralized logging (production)
 - **Winston Logger:** Structured logging with correlation IDs
 - **Health Monitoring:** Database and service health checks
+- **Prometheus Metrics:** Planned for metrics collection and exposure (Q4 2025)
 
 ### Authentication & Security
 - **JWT Authentication:** Client-ID based token system
@@ -239,10 +239,10 @@ This document provides **backend-specific technical implementation details**. Fo
 - **Graceful Shutdown:** Signal handling for zero-downtime deployments
 
 ### Monitoring & Observability
-- **Metrics:** Business and technical metrics via Prometheus
 - **Logging:** Structured JSON logs with correlation tracking
-- **Alerting:** Health check and error rate monitoring
+- **Health Monitoring:** Database connectivity and service health checks
 - **Tracing:** Request correlation across service boundaries
+- **Metrics:** Business and technical metrics planned via Prometheus (Q4 2025)
 
 ### Security
 - **Authentication:** JWT-based client authentication
@@ -266,10 +266,16 @@ This document provides **backend-specific technical implementation details**. Fo
 - `src/config/auth-config.ts` - Authentication configuration
 - `src/config/server-config.ts` - Server port configuration
 
+### Documentation Sync (August 22, 2025)
+- **Environment Variables**: Updated all references from `PORT` to `BACKEND_PORT` for consistency
+- **Observability**: Clarified Prometheus as planned feature rather than implemented
+- **Cross-Repository Sync**: Aligned with main repository documentation standards
+
 ---
 This document should be updated whenever significant changes are made to the backend architecture, workflows, or integrations.
 
 **📔 Documentation Sync**: Changes to this document should be reflected in the [main repository UNDERSTANDING.md](../UNDERSTANDING.md) to maintain system-wide consistency.
 
 **Last Understood Commit**: 85e3284 (fix: env-type.ts) - 2025-08-21 22:32:22 +0530
+**Documentation Sync**: Task 01 completed - August 22, 2025
 **Next Update Trigger**: Any functional code changes, architecture modifications, or environment configuration updates
